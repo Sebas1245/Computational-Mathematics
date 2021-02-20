@@ -1,0 +1,122 @@
+\documentclass[]{book}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{sol}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\setlength{\itemsep}{0.45in}
+\pagestyle{empty}
+
+\title{Comptutational Mathematics TC2020}
+\author{\textbf{Assignment 01} \\* Sebastián Saldaña \\* A01570274}
+\date{12.February.2021}
+
+\begin{document}
+\begin{center}
+    {\huge Computational Mathematics TC2020}\\[1.5ex]
+    {\large \textbf{Assignment 01}\\[1.5ex] 
+    Sebastián A. Saldaña\\
+    A01570274\\%You should put your name here
+    12.02.21} %You should write the date here.
+    \end{center}
+    
+    \vspace{0.2 cm}
+
+    \section*{Preliminaries: Sets, relations and functions}
+    \begin{enumerate}
+        \item Calculate the result of the following operations (4 marks):
+        \begin{enumerate}
+            \item $\{a,b,c\} \times \{1,2,3,4\}$ \newline
+            $S = \{(a,1),(a,2),(a,3),(a,4),(b,1),(b,2),(b,3),(b,4),(c,1),(c,2),(c,3),(c,4)\}$
+            \item $\{a,\{b\},\{\{c\}\}\} \times \emptyset$ \newline $S = \emptyset$
+            \item $\mathcal{P}(\{x : x \in \mathbb{N}, x < 4\})$ \newline
+            $S = \{\emptyset,1,2,3,\{1,2\},\{1,3\},\{2,3\},\{1,2,3\}\}$
+            \item $\vert\mathcal{P}(\{y : y \in \mathbb{Z},0 < y < 10\})\vert = 512$
+        \end{enumerate}
+        \item The following are relations from $\{1,2,3,4\}$ to $\{1,2,3,4\}$. Indicate which relations are \textbf{transitive}, \textbf{reflexive}, or \textbf{symmetric}. Also indicate which are \textbf{functions} and which one are only \textbf{relations}. In case of being functions, indicate if they are \textbf{total} or \textbf{partial} functions, and which ones are \textbf{injective}, \textbf{surjective} and \textbf{bijective} (4 marks).
+        \begin{enumerate}
+            \item $\{(2,2),(3,3),(1,1),(4,4)\}$ \emph{\textbf{This is a reflexive, transitive, and symmetric relation which is also a total, bijective function.}}
+            \item $\{(1,1),(2,2),(3,3),(4,3)\}$ \emph{\textbf{This is a transtivie relation and a total,surjective function.}}
+            \item $\{(1,1),(3,4),(2,2),(3,3)\}$ \emph{\textbf{This is only a relation}}
+            \item $\{(1,1),(2,2),(3,3)\}$ \emph{\textbf{This is a reflexive, transitive, and symmetric relation which is also a partial, surjective function.}}
+        \end{enumerate}
+        \item Using the information from the lecture, investigate what is the \textbf{transitive closure}. Then, write its definition in your own words. Finally, find the transitive closure for each of the relations of the previous problem (2 marks)\footnote{Do not forget to cite the sources properly. Consider that they are reliable sources and, if possible, list two or three resouces; do not consider just the first definition you find.}.
+        \newline A \textbf{transitive closure} is the set of individual relations between elements of a relation that encapsulates all of these elements that will make it transitive. 
+        \begin{enumerate}
+            \item $R^* = \{(2,2),(3,3),(1,1),(4,4)\}$
+            \item $R^* = \{(1,1),(2,2),(3,3),(4,3)\}$
+            \item $R^* = \{(1,1),(3,4),(2,2),(3,3),(4,3)\}$
+            \item $R^* = \{(1,1),(2,2),(3,3)\}$
+        \end{enumerate}
+    \end{enumerate}
+    \begin{thebibliography}{9}
+    \bibitem{udacityvid}
+    Udacity. (2015). \textit{Transitive Closure - Georgia Tech - Computability, Complexity, Theory: Algorithms}. Recovered from \texttt{https://www.youtube.com/watch?v=NM0mAmylfMg}
+    \bibitem{gvsumath}
+    GVSUMath. (2015). \textit{Transitive Closure}.\\* Recovered from: \texttt{https://www.youtube.com/watch?v=OO8Jfs9uZnc}
+    \end{thebibliography}
+\end{document}

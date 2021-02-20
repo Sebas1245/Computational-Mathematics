@@ -1,0 +1,157 @@
+\documentclass[]{book}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{sol}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\setlength{\itemsep}{0.45in}
+\pagestyle{empty}
+
+
+
+\begin{document}
+
+\begin{center}
+{\huge Computational Mathematics TC2020 -- 01}\\[1.5ex]
+{\large \textbf{Assignment 02}\\[1.5ex] 
+Sebastián A. Saldaña\\
+A01570274\\%You should put your name here
+12.02.21} %You should write the date here.
+\end{center}
+
+\vspace{0.2 cm}
+
+\subsection*{Preliminaries: Propositional logic}
+\subsubsection*{Formalization (2 points)}
+Formally express the following ideas using logic propositions. This means you must translate each idea to individual propositions and then link them using logic operators.
+\begin{enumerate}
+	\item In the poles the cold is really intense only if the planets revolve around the sun. \\* $p$ = The cold is really intense in the poles \\* $q$ = The planets revolve around the sun \\* $p \Leftrightarrow q$
+	\item If it is true that Aristotle was born in Estagira and that he was the tutor of Alexander The Great, \underline{and in addition to the previous that if he was born in Estagira he was then Macedonian by birth}, \emph{then he was effectively Macedonian}. \newline 
+	$p$ = Aristotle was born in Estagira \newline 
+	$q$ = Aristotle was tutor of Alexander the Great \newline 
+	$r$ = Aristotle was Macedonian by birth \newline
+	$s$ = Aristotle was Macedonian \newline
+	$(p \land q) \land (p \Rightarrow r)  \Rightarrow s$
+\end{enumerate}
+
+\subsubsection*{Truth tables (2 points)}
+Write down the truth table of the following expression $(p \land (q \lor \neg p) ) \lor r$. Specify in columns as much as you can about how you are chaining each result. \newline
+\begin{displaymath}
+	\begin{array}{|c c c|c|c|c|}
+		p & q & r & q \lor \lnot p & p \land (q \lor \lnot p) & (p \land (q \lor \lnot p)) \lor r\\
+		\hline
+		T & T & T & T & T & T\\
+		T & T & F & T & T & T\\
+		T & F & T & F & F & T\\
+		T & F & F & F & F & F\\
+		F & T & T & T & F & T\\
+		F & T & F & T & F & F\\
+		F & F & T & T & F & T\\
+		F & F & F & T & F & F\\
+	\end{array}
+\end{displaymath}
+
+\subsubsection*{Simplifying propositions (2 points)}
+Simplify the following proposition $(\neg (p \land \neg q)) \land (p \lor q)$. 
+You can use equivalences and properties of operations to make the simplification.
+Workout the individual steps you follow here. \newline
+$\lnot(p \land \lnot q) \equiv \lnot p \lor q$ \newline
+$(\lnot p \lor q) \land (p \lor q) \equiv q$ \newline
+This equivalence is proven by the following truth table: 
+\begin{displaymath}
+	\begin{array}{|c c|c|c|c|}
+		p & q & \lnot p \lor q & p \lor q & (\lnot p \lor q) \land (p \lor q)\\
+		\hline
+		T & T & T & T & T\\
+		T & F & F & T & F\\
+		F & T & T & T & T\\
+		F & F & T & F & F\\
+	\end{array}
+\end{displaymath}
+
+
+
+\subsubsection*{Proof of equivalences (4 points)}
+Use logic equivalences and the properties of propositions to demonstrate that the following equivalence is true: $(p \implies q) \lor (p \implies r) \equiv p \implies (q \lor r)$. Workout the individual steps you follow to demonstrate this.
+
+You can think of this as selecting one of the two propositions and somehow modify it incrementally until it becomes the same as the other proposition.\newline
+\begin{center}
+	\emph{Modifying the L.H.S as follows:}
+\end{center}
+\begin{gather}
+	p \Rightarrow q \equiv \lnot p \lor q\\
+	p \Rightarrow r \equiv \lnot p \lor r\\
+	(p \implies q) \lor (p \implies r) \equiv \lnot p \lor q \lor \lnot p \lor r\\
+	\lnot p \lor q \lor \lnot p \lor r \equiv \lnot p \lor \lnot p \lor q \lor r \equiv \lnot p \lor q \lor r\\
+	\lnot p \lor q \lor r \equiv \lnot p \lor (q \lor r) \equiv p \implies (q \lor r) 
+\end{gather}
+\begin{center}
+	\emph{Shows we can get on the L.H.S what is on the R.H.S.} $\blacksquare$
+\end{center}
+\end{document}
+
+
